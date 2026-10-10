@@ -1,10 +1,7 @@
 name: Metrics
 on:
-  # Her gece yarısı otomatik güncellenmesi için:
   schedule: [{cron: "0 0 * * *"}]
-  # İstediğin zaman manuel olarak güncelleyebilmen için:
   workflow_dispatch:
-  # README'yi her değiştirdiğinde anında güncellenmesi için:
   push: {branches: ["master", "main"]}
 jobs:
   github-metrics:
@@ -14,7 +11,28 @@ jobs:
     steps:
       - uses: lowlighter/metrics@latest
         with:
-          # Az önce eklediğin gizli anahtar burada kullanılıyor:
           token: ${{ secrets.METRICS_TOKEN }}
-          # Kullanıcı adını belirtiyoruz:
           user: Foxlen0
+          
+          # Genel Ayarlar
+          template: classic
+          base: header, activity, community, repositories, metadata
+          config_timezone: Europe/Istanbul
+          
+          # 3D İzometrik Takvim Eklentisi
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
+          
+          # Diller Eklentisi
+          plugin_languages: yes
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_limit: 8
+          
+          # Kodlama Alışkanlıkları Eklentisi
+          plugin_habits: yes
+          plugin_habits_facts: yes
+          plugin_habits_charts: yes
+          
+          # Başarılar Eklentisi
+          plugin_achievements: yes
+          plugin_achievements_display: compact
