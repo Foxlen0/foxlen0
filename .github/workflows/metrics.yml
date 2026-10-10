@@ -1,0 +1,20 @@
+name: Metrics
+on:
+  # Her gece yarısı otomatik güncellenmesi için:
+  schedule: [{cron: "0 0 * * *"}]
+  # İstediğin zaman manuel olarak güncelleyebilmen için:
+  workflow_dispatch:
+  # README'yi her değiştirdiğinde anında güncellenmesi için:
+  push: {branches: ["master", "main"]}
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Az önce eklediğin gizli anahtar burada kullanılıyor:
+          token: ${{ secrets.METRICS_TOKEN }}
+          # Kullanıcı adını belirtiyoruz:
+          user: Foxlen0
